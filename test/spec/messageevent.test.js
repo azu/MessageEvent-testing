@@ -48,11 +48,9 @@
             });
             it("should asynchronize work", function (done) {
                 messageListener = function (event) {
-                    if (event.source !== window) {
-                        return;
-                    }
-                    assert.ok(true);
-                    assert.equal(event.data, "data-data");
+                    assert.strictEqual(event.source, window);
+                    assert.strictEqual(event.origin, location.protocol + "//" + location.host)
+                    assert.strictEqual(event.data, "data-data");
                     done();
                 };
                 window.addEventListener("message", messageListener, false);
