@@ -1,0 +1,8 @@
+{
+    "framework": "mocha+chai",
+    "test_page": "test/index.html",
+    "launch_in_dev": [
+        "Chrome",
+        "Firefox"
+    ]
+}
