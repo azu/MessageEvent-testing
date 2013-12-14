@@ -28,12 +28,14 @@
             it("should passing data", function () {
                 addMessageEvent(function (event) {
                     called = true;
-                    assert.equal(event.origin, "watashi-wo-trust-me");
-                    assert.equal(event.data, "data-data");
+                    assert.strictEqual(event.origin, "watashi-wo-trust-me");
+                    assert.strictEqual(event.data, "data-data");
+                    assert.strictEqual(event.source, window);
                 });
                 var messageEvent = new MessageEvent("event-name", {
                     data: "data-data",
-                    origin: "watashi-wo-trust-me"
+                    origin: "watashi-wo-trust-me",
+                    source: window
                 });
                 document.dispatchEvent(messageEvent);
                 assert.isTrue(called);
@@ -46,7 +48,7 @@
             });
             it("should asynchronize work", function (done) {
                 messageListener = function (event) {
-                    if(event.source !== window) {
+                    if (event.source !== window) {
                         return;
                     }
                     assert.ok(true);
