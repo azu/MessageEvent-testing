@@ -46,6 +46,9 @@
             });
             it("should asynchronize work", function (done) {
                 messageListener = function (event) {
+                    if(event.source !== window) {
+                        return;
+                    }
                     assert.ok(true);
                     assert.equal(event.data, "data-data");
                     done();
