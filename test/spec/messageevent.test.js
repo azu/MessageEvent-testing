@@ -38,7 +38,6 @@
                     source: window
                 });
                 document.dispatchEvent(messageEvent);
-                console.log("messageEvent", messageEvent);
                 assert.isTrue(called);
             });
             it("should synchronously fire 'message' event ", function () {
