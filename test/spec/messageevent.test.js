@@ -38,7 +38,23 @@
                     source: window
                 });
                 document.dispatchEvent(messageEvent);
+                console.log("messageEvent", messageEvent);
                 assert.isTrue(called);
+            });
+            it("should synchronously fire 'message' event ", function () {
+                messageListener = function (event) {
+                    called = true;
+                    assert.strictEqual(event.data, "data-data");
+                    assert.strictEqual(event.origin, "watashi-wo-trust-me")
+                };
+                window.addEventListener("message", messageListener, false);
+                var messageEvent = new MessageEvent("message", {
+                    data: "data-data",
+                    origin: "watashi-wo-trust-me"
+                });
+                window.dispatchEvent(messageEvent);
+                assert.isTrue(called);// sync
+                window.removeEventListener("message", messageListener);
             });
         });
         context("when use postMessage", function () {
